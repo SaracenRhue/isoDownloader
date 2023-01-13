@@ -2,7 +2,6 @@ from os import system as cmd
 import requests
 from bs4 import BeautifulSoup
 from pick import pick
-import yaml
 
 cmd('rm -fr main.py')
 def download_file(url):
