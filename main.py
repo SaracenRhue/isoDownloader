@@ -27,7 +27,8 @@ def get_arch_amd64():
             break
 
 def get_debian_amd64():
-    iso_urls['amd64']['debian'] = 'https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/weekly-builds/amd64/iso-cd/firmware-testing-amd64-netinst.iso'
+    URL = 'https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/weekly-builds/amd64/iso-cd/firmware-testing-amd64-netinst.iso'
+    iso_urls['amd64']['debian'] = URL
 
 def get_endeavouros_amd64():
     URL = 'https://endeavouros.com/latest-release/'
