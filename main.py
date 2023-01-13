@@ -27,7 +27,7 @@ def get_arch_amd64():
             break
     iso_urls['amd64']['arch'] = file_dir + file
 
-def get_endevouros_amd64():
+def get_endeavouros_amd64():
     URL = 'https://endeavouros.com/latest-release/'
     r = requests.get(URL)
     soup = BeautifulSoup(r.content, 'html.parser')
@@ -159,6 +159,9 @@ if option == 'amd64':
             download_file(iso_urls[option]['arch'])
         elif i == 'debian':
             download_file(iso_urls[option]['debian'])
+        elif i == 'endeavouros':
+            get_endeavouros_amd64()
+            download_file(iso_urls[option]['endeavouros'])
         elif i == 'fedora':
             get_fedora_amd64()
             download_file(iso_urls[option]['fedora'])
