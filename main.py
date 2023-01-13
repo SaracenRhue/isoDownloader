@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from pick import pick
 import yaml
 
-cmd('rm -fr main.py')
+#cmd('rm -fr main.py')
 def download_file(url):
     cmd(f'wget -c --retry-connrefused --tries=0 --timeout=5 {url}')
 
@@ -144,40 +144,12 @@ if option == 'amd64':
     title = 'Please choose your OS: '
     options = list(iso_urls['amd64'].keys())
     selected = pick(options, title, multiselect=True, min_selection_count=1)
-    for i in [i[0] for i in selected]:
-        if i == 'arch':
-            get_arch_amd64()
-            download_file(iso_urls[option]['arch'])
-        elif i == 'debian':
-            get_debian_amd64()
-            download_file(iso_urls[option]['debian'])
-        elif i == 'endeavouros':
-            get_endeavouros_amd64()
-            download_file(iso_urls[option]['endeavouros'])
-        elif i == 'fedora':
-            get_fedora_amd64()
-            download_file(iso_urls[option]['fedora'])
-        elif i == 'kali':
-            get_kali_amd64()
-            download_file(iso_urls[option]['kali'])
-        elif i == 'nixos':
-            get_nixos_amd64()
-            download_file(iso_urls[option]['nixos'])
-            
 elif option == 'arm64':
     title = 'Please choose your OS: '
     options = list(iso_urls['arm64'].keys())
     selected = pick(options, title, multiselect=True, min_selection_count=1)
-    for i in [i[0] for i in selected]:
-        if i == 'debian':
-            get_debian_arm64()
-            download_file(iso_urls[option]['debian'])
-        elif i == 'fedora':
-            get_fedora_arm64()
-            download_file(iso_urls[option]['fedora'])
-        elif i == 'kali':
-            get_kali_arm64()
-            download_file(iso_urls[option]['kali'])
-        elif i == 'nixos':
-            get_nixos_arm64()
-            download_file(iso_urls[option]['nixos'])
+
+for i in [i[0] for i in selected]:
+    exec(f'get_{i}_{option}()')
+for url in [url for url in list(iso_urls['amd64'].values()) + list(iso_urls['arm64'].values()) if url != '']:
+    download_file(url)
