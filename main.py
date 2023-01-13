@@ -120,6 +120,16 @@ def get_nixos_arm64():
             iso_urls['arm64']['nixos'] = str(link.get('href'))
             break
 
+def get_ubuntu_arm64():
+    URL = 'https://ubuntu.com/download/server/arm'
+    r = requests.get(URL)
+    soup = BeautifulSoup(r.content, 'html.parser')
+    links = soup.find_all('a')
+    for link in links:
+        if str(link.get('href')).endswith('.iso') and 'arm64' in str(link.get('href')):
+            iso_urls['arm64']['ubuntu'] = str(link.get('href'))
+            break
+
 iso_urls = {
     'amd64':{
         'arch': None,
@@ -133,20 +143,21 @@ iso_urls = {
         'debian': None,
         'fedora': None,
         'kali': None,
-        'nixos': None
+        'nixos': None,
+        'ubuntu': None
         }
     }
 
-title = 'Please choose your architecture: '
+title = 'Please choose your architecture: (Press ENTER to continue)'
 options = ['amd64', 'arm64']
 option, index = pick(options, title)
 
 if option == 'amd64':
-    title = 'Please choose your OS: '
+    title = 'Please choose your OS: (Press SPACE to select, ENTER to continue)'
     options = list(iso_urls['amd64'].keys())
     selected = pick(options, title, multiselect=True, min_selection_count=1)
 elif option == 'arm64':
-    title = 'Please choose your OS: '
+    title = 'Please choose your OS: (Press SPACE to select, ENTER to continue)'
     options = list(iso_urls['arm64'].keys())
     selected = pick(options, title, multiselect=True, min_selection_count=1)
 
