@@ -8,6 +8,14 @@ This script downloads the latest ISOs of various systems.
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/SaracenRhue/isoDownloader/main/get_iso.sh)"
 ```
 
+or
+
+```bash
+wget -c --retry-connrefused --tries=0 --timeout=5 https://raw.githubusercontent.com/SaracenRhue/isoDownloader/main/main.py
+python3 main.py
+rm -fr main.py
+```
+
 ## requirements
 
 * curl
