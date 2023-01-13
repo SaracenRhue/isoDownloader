@@ -122,18 +122,18 @@ def get_nixos_arm64():
 
 iso_urls = {
     'amd64':{
-        'arch': '',
-        'debian': '',
-        'endeavouros': '',
-        'fedora': '',
-        'kali': '',
-        'nixos': ''
+        'arch': None,
+        'debian': None,
+        'endeavouros': None,
+        'fedora': None,
+        'kali': None,
+        'nixos': None
         },
     'arm64':{
-        'debian': '',
-        'fedora': '',
-        'kali': '',
-        'nixos': ''
+        'debian': None,
+        'fedora': None,
+        'kali': None,
+        'nixos': None
         }
     }
 
@@ -152,5 +152,5 @@ elif option == 'arm64':
 
 for i in [i[0] for i in selected]:
     exec(f'get_{i}_{option}()')
-for url in [url for url in list(iso_urls['amd64'].values()) + list(iso_urls['arm64'].values()) if url != '']:
+for url in [url for url in list(iso_urls['amd64'].values()) + list(iso_urls['arm64'].values()) if url != None]:
     download_file(url)
