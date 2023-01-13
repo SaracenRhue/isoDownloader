@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from pick import pick
 import yaml
 
+cmd('rm -fr main.py')
 def download_file(url):
     cmd(f'wget -c --retry-connrefused --tries=0 --timeout=5 {url}')
 
@@ -186,5 +187,3 @@ elif option == 'arm64':
         elif i == 'nixos':
             get_nixos_arm64()
             download_file(iso_urls[option]['nixos'])
-            
-        print(items)
