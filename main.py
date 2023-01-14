@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 from pick import pick
 
-cmd('rm -fr main.py')
+#cmd('rm -fr main.py')
 def download_file(url):
     cmd(f'wget -c --retry-connrefused --tries=0 --timeout=5 {url}')
 
@@ -148,19 +148,20 @@ iso_urls = {
     }
 
 title = 'Please choose your architecture: (Press ENTER to continue)'
-options = ['amd64', 'arm64']
+options = list(iso_urls.keys())
 option, index = pick(options, title)
 
-if option == 'amd64':
+
+if option == list(iso_urls.keys())[0]: # amd64
     title = 'Please choose your OS: (Press SPACE to select, ENTER to continue)'
-    options = list(iso_urls['amd64'].keys())
+    options = list(iso_urls[list(iso_urls.keys())[0]].keys())
     selected = pick(options, title, multiselect=True, min_selection_count=1)
-elif option == 'arm64':
+elif option == list(iso_urls.keys())[1]: # arm64
     title = 'Please choose your OS: (Press SPACE to select, ENTER to continue)'
-    options = list(iso_urls['arm64'].keys())
+    options = list(iso_urls[list(iso_urls.keys())[1]].keys())
     selected = pick(options, title, multiselect=True, min_selection_count=1)
 
 for i in [i[0] for i in selected]:
     exec(f'get_{i}_{option}()')
-for url in [url for url in list(iso_urls['amd64'].values()) + list(iso_urls['arm64'].values()) if url != None]:
+for url in [url for url in list(iso_urls[list(iso_urls.keys())[0]].values()) + list(iso_urls[list(iso_urls.keys())[1]].values()) if url != None]: # run for all urls that where found
     download_file(url)
